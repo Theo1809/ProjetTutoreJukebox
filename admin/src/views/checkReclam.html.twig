@@ -1,0 +1,36 @@
+{% include 'layout.html.twig' %}
+<div> 
+        <table class="table  table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nom établissement</th>
+      <th scope="col"></th>
+      <th scope="col">Nom propriétaire</th>
+      <th scope="col"></th>
+      <th scope="col">Objet</th>
+      <th scope="col"></th>
+      <th scope="col">Etat</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for reclam in reclam %}
+<tr>
+<td>{{reclam.nom_etab}}<td>
+<td>{{reclam.nom_proprio}}<td>
+<td>{{reclam.texte}}<td>
+          {% if reclam.etat == 1 %}
+    <td class="bg-success"> <td>
+      {% elseif reclam.etat == 0 %}
+    <td class="bg-warning"> <td>
+             {% elseif reclam.etat == 2 %}
+    <td class="bg-danger"> <td>
+              {% endif %}
+
+
+   <td> <a href="{{ path_for('supprimerreclam', { 'id': reclam.id }) }}"><img src="src/views/img/bin.png" alt="bin"></a><td>
+</tr>
+  {% endfor %}
+  </tbody>
+</div> 

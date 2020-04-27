@@ -1,0 +1,42 @@
+  {% block stylesheets %}
+
+        {% endblock %}
+  {% include 'layout.html.twig' %}
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+ 
+    </div>
+    <div class="col-5">
+
+ 
+
+<div class="list-group text-center" id="myList" role="tablist">
+ <h4>Musique dans la playlist</h4> 
+
+  {% for music in music %}
+
+  <a class="list-group-item list-group-item-action"   role="tab">{{music.titre}}  {% if music.chemin == "" %}     <input id="file" type="file" />{% endif %}</a>
+
+
+
+   {% endfor %}
+
+</div>
+
+
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Tab panes -->
+

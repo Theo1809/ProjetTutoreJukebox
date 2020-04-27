@@ -1,0 +1,77 @@
+  {% include 'layout.html.twig' %}
+  {% block stylesheets %}
+      <link rel="stylesheet" href="src/views/css/playllist.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        {% endblock %}
+
+<div class="conatiner">
+<div class="wrap">
+
+  {% for playlist2 in playlist2 %}
+<div class="card  boxtwo">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{playlist2.image_playlist}}" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{playlist2.nom}}</h5>
+        <p class="card-text">{{playlist2.description}}</p>
+      </div>
+         <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                           <a href="{{ path_for('playlist', { 'id': playlist2.id }) }}"> <button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                           <a href="{{ path_for('updatePlaylist', { 'id': playlist2.id }) }}"> <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                           <a href="{{ path_for('supprimerPlaylist', { 'id': playlist2.id }) }}"> <button type="button" class="btn btn-sm btn-outline-secondary">Supprimer</button></a>
+                     </div>
+                            <small class="text-muted">{{playlist2.auteur}}</small>
+                 </div>
+    </div>
+  </div>
+</div>
+
+
+  {% endfor %}
+</div></div>
+<div class="conatiner">
+<div class="wrap">
+           
+   
+  {% for playlist in playlist %}
+	<div class="card box" >
+                <img class="card-img-top" src="{{playlist.image_playlist}}" alt="Card image cap">
+                <div class="card-body">
+                        <h5 class="card-title">{{playlist.nom}}</h5>
+                  <p class="card-text">     {{playlist.description}}</p>
+                  </div>
+                  <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                                      <a href="{{ path_for('playlist', { 'id': playlist.id }) }}"> <button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                                      <a href="{{ path_for('updatePlaylist', { 'id': playlist.id }) }}"> <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                                      <a href="{{ path_for('supprimerPlaylist', { 'id': playlist.id }) }}"> <button type="button" class="btn btn-sm btn-outline-secondary">Supprimer</button></a>
+                          </div>
+                              <small class="text-muted">{{playlist.auteur}}</small>
+                        </div>
+</div>
+
+   {% endfor %}
+	  <a href="{{ path_for('createPlaylist')}}"><div class="card box" >
+                <img class="card-img-top" src="src/views/img/plus.png" alt="Card image cap" style="height:100%">
+                <div class="card-body">
+                  </div>
+           
+</div>
+
+</a>
+	  
+	  
+</div>
+</div>
+
+
+{% block script %}
+
+
+{% endblock %}

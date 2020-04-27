@@ -1,0 +1,17 @@
+
+{% include 'layout.html.twig' %}
+
+<input class="form-control" type="text" placeholder="Search" aria-label="Search">
+
+
+<h2>Musique dans la base de donnéess</h2>
+
+<ul class="list-group">
+  {% for music in music %}
+
+
+
+    <li class="list-group-item"> {{music.titre}}</li>
+  
+
+   {% endfor %}

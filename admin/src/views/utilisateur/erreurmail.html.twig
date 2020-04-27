@@ -1,0 +1,23 @@
+  {% block stylesheets %}
+            <link href="../../src/css/accueil.css" type="text/css" rel="stylesheet" />
+        {% endblock %}
+
+   
+{% block content %}     
+        <div class="main">
+        <h1>l'émail entrée est déja utilisé </h1>
+            <div class="sub-main">
+            <h1>Retour création compte</h1>
+           <a href="{{ path_for('creacompte')}}">  <button id="bu1" class="button" >Création Compte</button></a>
+            </div>
+               <div class="sub-main">
+            <h1>Accueil</h1>
+           <a href="{{ path_for('accueil')}}">  <button id="bu1" class="button" >Accueil</button></a>
+            </div>
+
+        </div>
+
+
+
+
+{% endblock %}

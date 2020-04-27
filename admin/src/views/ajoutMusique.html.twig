@@ -1,0 +1,120 @@
+ {% block stylesheets %}
+
+        {% endblock %}
+  {% include 'layout.html.twig' %}
+
+{% block script %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"</script>
+<script src="https://getbootstrap.com/dist/js/bootstrap.min.js"</script>
+<script src="src/script/OpenFormulaire.js"></script>
+<script>
+
+var List=[];
+var ti="";
+
+function musiqueInformation() {
+        $.ajax({
+            url: "https://jukebox-admin.herokuapp.com/getMusic",
+            method: 'GET',
+            headers: {
+                "Musicname":document.getElementById('textbox_id').value
+            }
+            }).then(function(data) {
+                let jData = JSON.parse(data)
+            ti=JSON.stringify(jData.Titre);
+          List.push(jData);
+var node=document.createElement("LI");
+ node.classList.add("list-group-item");
+var minutes = Math.floor(jData.Duree / 60);
+var seconds = jData.Duree - minutes * 60;
+ var x = document.createElement("INPUT");
+  x.setAttribute("enctype", "multipart/form-data");
+ x.setAttribute("type", "file");
+x.setAttribute("id", "file");
+x.setAttribute("name", "file");
+var textnode =document.createTextNode("Titre :  "+jData.Titre + "   Artiste: "+jData.Auteur +"   Durée: "+minutes+"min:"+seconds+"sec"  );
+
+node.appendChild(textnode);
+node.appendChild(x);
+document.getElementById("pp").appendChild(node);
+            });
+ 
+}
+
+
+
+function afficherList() {
+var d = document.getElementById("file").value;
+var input = document.getElementById('file');
+ var file = input.files[0];
+console.log(d);
+
+console.log(file);
+var formData = new FormData();
+formData.append("file",input.files[0]);
+
+
+     $.ajax({
+            url: "https://jukeboxapimusic.herokuapp.com/postMusic",
+            method: 'POST',
+             headers: {
+              "name":ti
+            },
+               cache: false,
+    contentType: false,
+    processData: false,
+            data: formData
+            }).then(function(data) {
+              console.log(data);
+            });
+
+List.forEach(element => console.log(element.Titre));
+request= new XMLHttpRequest();
+request.open("POST", "src/Controllers/liredonne.php", true);
+request.setRequestHeader("Content-type", "application/json");
+request.send(List);
+}
+
+
+function viderList() {
+
+document.getElementById("pp").innerHTML="";
+document.getElementById('textbox_id').value="";
+}
+
+
+</script>
+
+{% endblock %}
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title custom_align" id="Heading">Ajouter Musique <span data-dismiss="modal" class="=glyphicon glyphicon-remove"></span></h4>
+ 
+      </div>
+          <div class="modal-body">
+
+     <nav class="navbar navbar-light bg-light">
+  
+    <input class="form-control mr-sm-2"  id="textbox_id" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" id="search"  onclick="musiqueInformation(); ">Search</button>
+
+</nav>
+
+<ul id="pp" class="list-group">
+</ul>
+      </div>
+        <div class="modal-footer ">
+  <button type="button" class="btn btn-warning"  onclick="afficherList(); " ><span class="glyphicon glyphicon-ok-sign"></span> Valider</button>
+        <button type="button" class="btn btn-default" onclick="viderList(); " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+    </div>
+
+<button class="list-group-item  btn btn-outline-primary btn-s" data-title="popup" data-toggle="modal" data-target="#popup" >Ajouter Musique</button>
