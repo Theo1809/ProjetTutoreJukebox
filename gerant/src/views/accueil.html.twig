@@ -1,0 +1,33 @@
+{% include 'layout.html.twig' %}
+  {% block stylesheets %}
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('src/views/img/juke.png');
+  min-height: 92%;
+filter : blur(5px);
+  background-position: center;
+  background-size: cover;
+}
+</style>
+        {% endblock %}
+
+
+
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white"></div>
+
+  <div class="w3-display-middle w3-text-white">
+    <h1 class="w3-jumbo w3-animate-top">Jukebox Moderne</h1>
+    <hr class="w3-border-black" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">  </br>   <a  href="{{ path_for('declarer')}}"class="btn btn-lg btn-secondary">Ajouter Jukebox</a></p>
+  </div>
+
+
+
+</body>

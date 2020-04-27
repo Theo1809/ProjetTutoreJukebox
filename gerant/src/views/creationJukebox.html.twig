@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+
+
+<h1> Ajout d'un jukebox </h1>
+
+<form  method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Nom Jukebox</label>
+    <input type="text" class="form-control" name="nom" id="nom" value="{{ juke.nom}}">
+    <label for="exampleInputEmail1">Id établissement</label>
+    <input type="text" class="form-control" name="id_etablissement" id="id_etablissement" value="{{ juke.id_etablissement}}">
+
+
+    <label for="exampleInputEmail1">Id playlist</label>
+    <input type="text" class="form-control" name="id_playlist" id="id_playlist" value="{{ juke.id_playlist}}">
+
+   </div>
+  <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>
+ 
+
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% include 'layout.html.twig' %}
+<div> 
+<label for="story">Objet Réclamation :</label>
+<form  method="post">
+  <div class="form-group">
+    <label >Nom établissement</label>
+    <input type="text" class="form-control" name="nom_etab" id="nom_etab" value="{{ reclam.nom_etab}}">
+    <label>Nom propriétaire</label>
+    <input type="text" class="form-control" name="nom_proprio" id="nom_proprio" value="{{ reclam.nom_proprio}}">
+    <input  type="text" id="texte" name="texte"   value="{{ reclam.texte}}">
+
+
+
+    <label >Etat</label>
+    <input type="number" class="form-control" name="etat" id="etat" value="{{ reclam.etat}}">
+
+   </div>
+  <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>
+
+
+</div> 

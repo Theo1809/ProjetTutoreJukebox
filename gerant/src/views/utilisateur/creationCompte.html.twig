@@ -1,0 +1,26 @@
+{% block stylesheets %}
+        <link href="../../src/views/css/connexion.css" type="text/css" rel="stylesheet" />
+
+{% endblock %}
+{% block content %}
+<html>
+    <head>
+        <title>Sign up</title>
+        <link rel="stylesheet" href="Style.css">
+
+    </head>
+
+				    <body>
+<div class="bgimg"></div>
+
+				<!--path_for('login') -->
+				<form action="{{utilisateurs.id}}" class="Box"  method="POST">
+						<h1>Sign up</h1>				
+						<input type="text" name="nom" placeholder="nom"  id="nom" value="{{utilisateurs.nom}}" required>
+						<input type="password" name="mdp" placeholder="mot de passe" id="mdp" value="{{utilisateurs.mdp}}" required>     
+						<input type="text" name="mail" placeholder="mail" id="mail" value="{{utilisateurs.mail}}" required>
+                        <input type="submit"value="Sign up" >
+				</form>
+  </body>
+</html>
+{% endblock %}

@@ -1,0 +1,110 @@
+  {% block stylesheets %}
+
+        {% endblock %}
+  {% include 'layout.html.twig' %}
+
+{% block script %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"</script>
+<script src="https://getbootstrap.com/dist/js/bootstrap.min.js"</script>
+<script src="src/script/OpenFormulaire.js"></script>
+<script>
+
+var List=[];
+
+function musiqueInformation() {
+
+
+        $.ajax({
+            url: "https://jukebox-admin.herokuapp.com/getMusic",
+            method: 'GET',
+            headers: {
+                "Musicname":document.getElementById('textbox_id').value
+            }
+            }).then(function(data) {
+                let jData = JSON.parse(data)
+          List.push(jData);
+var node=document.createElement("LI");
+ node.classList.add("list-group-item");
+var minutes = Math.floor(jData.Duree / 60);
+var seconds = jData.Duree - minutes * 60;
+var textnode =document.createTextNode("Titre :  "+jData.Titre + "   Artiste: "+jData.Auteur +"   Durée: "+minutes+"min:"+seconds+"sec");
+node.appendChild(textnode);
+document.getElementById("pp").appendChild(node);
+            });
+ 
+}
+    var fileInput = document.querySelector('#file');
+
+    fileInput.addEventListener('change', function() {
+
+        var reader = new FileReader();
+
+        reader.addEventListener('load', function() {
+            alert('Contenu du fichier "' + fileInput.files[0].name + '" :\n\n' + reader.result);
+        }, false);
+
+        reader.readAsText(fileInput.files[0]);
+
+    }, false);
+function afficherList() {
+List.forEach(element => console.log(element));
+request= new XMLHttpRequest()
+request.open("POST", "src/Controllers/liredonne.php", true)
+request.setRequestHeader("Content-type", "application/json")
+request.send(List)
+}
+function viderList() {
+document.getElementById("pp").innerHTML="";
+document.getElementById('textbox_id').value="";
+}
+
+
+</script>
+
+{% endblock %}
+
+
+          <h4>Musique dans la playlist</h4> 
+<p data-placement="top" data-toggle="tooltip" title="popup"><button class="btn btn-danger btn-s" data-title="popup" data-toggle="modal" data-target="#popup" >Ajouter Musique</button></p>
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title custom_align" id="Heading">Ajouter Musique <span data-dismiss="modal" class="=glyphicon glyphicon-remove"></span></h4>
+ 
+      </div>
+          <div class="modal-body">
+
+     <nav class="navbar navbar-light bg-light">
+  
+    <input class="form-control mr-sm-2"  id="textbox_id" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" id="search"  onclick="musiqueInformation(); ">Search</button>
+
+</nav>
+<h4>Musiques à ajouter :</h4>
+<ul id="pp" class="list-group">
+</ul>
+      </div>
+        <div class="modal-footer ">
+  <button type="button" class="btn btn-warning"  onclick="afficherList(); " ><span class="glyphicon glyphicon-ok-sign"></span> Valider</button>
+        <button type="button" class="btn btn-default" onclick="viderList(); " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+    </div>
+<ul id="res" class="list-group">
+  {% for music in music %}
+
+
+
+    <li class="list-group-item"> {{music.titre}}  {% if music.chemin == "" %}     <input id="file" type="file" />{% endif %}
+</li>
+
+  <div id="res2"></div>
+
+   {% endfor %}
+</ul>

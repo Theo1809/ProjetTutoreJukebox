@@ -1,0 +1,105 @@
+{% extends 'layout.html.twig' %}
+{% block script %}
+    <script src="/src/script/OpenFormulaire.js"></script>
+    <script src="/src/script/FiltrerMusique.js"></script>
+    <script src="/src/script/CreerModifierPlaylist.js"></script>
+{% endblock %}
+
+{% block content %}
+<h3>c'est ici qu'on va modifier des playlists</h3>
+
+<p data-placement="top" data-toggle="tooltip" title="form"><button class="btn btn-danger btn-s" data-title="form" data-toggle="modal" data-target="#form" ><img src="/src/views/img/edit.png" class="img-thumbnail"></button></p>
+
+    <div>
+        <button class="filterButton" id="All"> Show all</button>
+        <p id="buttons"></p>
+    </div>
+
+    <div class="rechercheBar">
+        <input type=text  id = "rechercheChamp" placeholder="titre, artiste, genre..."></input>
+        <button type=submit id = "rechercheButton">Rechercher</button>
+    </div>
+    
+    {% set selectmusic = [] %}
+
+    {# {% set i = 0 %} #}
+
+<form action="/updatePlaylist{{playlist[0].id}}" method="POST">
+<div class="row" id="CatalogueMusic">
+        
+    {% for musique in musiques %}
+
+    {% set selec = 'false' %}
+    {% for musiqueP in musiquedeplaylist %}
+        {% if musique.id is same as (musiqueP.id_musique) %}
+            {% set selec = 'true' %}
+        {% endif %}
+    {% endfor %}
+
+    {% if selec is same as ('true') %}
+    <div class="cardMusic card col-sm-2 bg-primary order-first" titreMusic="{{ musique.title }}" artisteMusic="{{ musique.artistName }}" albumMusic="{{ musique.albumTitle }}">
+    {% else %}
+    <div class="cardMusic card col-sm-2" titreMusic="{{ musique.title }}" artisteMusic="{{ musique.artistName }}" albumMusic="{{ musique.albumTitle }}">
+    {% endif %}
+        <div id="image img-fluid img-thumbnail">
+             <img src="{{musique.albumPic}}" alt="#">
+        </div>
+        <div class="card-body">
+             <h5 class="card-title"> {{ musique.title }} </h5>
+            <h5 class="card-title"> {{ musique.artistName }} </h5>
+            <p class="card-text">     {{musique.albumTitle}}</p>
+            
+            {% if selec is same as ('true') %}
+            <input type="checkbox" name="id_musique[{{i}}]" value="{{musique.id}}" checked/><label>selectionne</label>
+            {% else %}
+            <input type="checkbox" name="id_musique[{{i}}]" value="{{musique.id}}"/><label>selectionne</label>
+            {% endif %}
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Info playlist</h4>
+            </div>
+           
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>Nom de la playlist</label>
+                        <input type="text" name="nom" id="nom" value="{{playlist[0].nom}}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Description de la playlist</label>
+                        <input type="text" name="description" id="description" value="{{playlist[0].description}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Créateur de la playlist</label>
+                        <input type="text" name="auteur" id="auteur" value="{{playlist[0].auteur}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>adresse de l'image</label>
+                        <input type="text" name="image_playlist" id="image_playlist" value="{{playlist[0].image_playlist}}">
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning" ><span class="glyphicon glyphicon-ok-sign"></span>Finir</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Retour</button>
+                </div>
+            </form>
+        </div>  <!-- /.modal-content --> 
+    </div> <!-- /.modal-dialog --> 
+</div>
+
+{% endblock %}
+

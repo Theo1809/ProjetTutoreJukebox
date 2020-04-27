@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<h3>voulez vous supprimer la playlist ?</h3>
+
+<p>nom de la playlist : {{playlist[0].nom}}</p>
+<p>description : {{playlist[0].description}}</p>
+<p>créateur de la playlist :{{playlist[0].auteur}}</p>
+
+<a href="{{ path_for('updatePlaylist', { 'id': playlist[0].id }) }}">Modifier</a>
+<a href="{{ path_for('testSupprimerPlaylist', { 'id': playlist[0].id }) }}">Supprimer</a>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+
+
+<h1> Modification de {{ juke[0].nom }} </h1>
+
+<form action="{{ modifierm }}" method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Nom établissement</label>
+    <input type="text" class="form-control" name="nom_etab" id="nom_etab" value="{{ juke[0].nom_etab}}">
+        <label for="exampleInputEmail1">Nom jukebox</label>
+    <input type="text" class="form-control" name="nom" id="nom"  value="{{ juke[0].nom}}">
+    <label for="exampleInputEmail1">Nom état</label>
+    <input type="text" class="form-control" name="etat" id="etat" value="{{ juke[0].etat}}">
+
+
+    <label for="exampleInputEmail1">Nom du propriétaire</label>
+    <input type="text" class="form-control" name="nom_proprio" id="nom_proprio" value="{{ juke[0].nom_proprio}}">
+    <label for="exampleInputEmail1">Prénom du propriétaire</label>
+    <input type="text" class="form-control" name="prenom" id="prenom" value="{{ juke[0].prenom}}">
+
+    <label for="exampleInputEmail1">Adresse de l'établissement</label>
+    <input type="text" class="form-control" name="adresse_etab" id="adresse_etab" value="{{ juke[0].adresse_etab}}">
+</div>
+  <button type="submit" class="btn btn-primary">Modifier</button>
+</form>
+ 
+
+{% endblock %}
+

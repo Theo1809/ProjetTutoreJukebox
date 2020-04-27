@@ -1,0 +1,51 @@
+{% include 'layout.html.twig' %}
+{% block content %}
+
+<h1> Déclaration Jukebox </h1>
+				
+
+
+				<!--path_for('login') -->
+				<form action="{{jukebox.id}}"method="post">	
+					<div class="form-group">
+					<div>
+						<label for="id">ID du Jukebox</label>
+						<input type="text" class="form-control" name="id"  id="id" value="{{jukebox.id}}" required>
+							</div>
+                        <br>
+		            <div>
+						<label for="nom">Nom propriétaire</label>
+						<input type="text" class="form-control" name="nom"  id="nom" value="{{proprio.nom}}" required>
+							</div>
+                        <br>
+   <div>
+						<label for="prenom">Prénom propriétaire</label>
+						<input type="text"  class="form-control"name="prenom"  id="prenom" value="{{proprio.prenom}}" required>
+							</div>
+                        <br>
+   <div>
+						<label for="telephone">Téléphone propriétaire</label>
+						<input type="text" class="form-control" name="telephone"  id="telephone" value="{{proprio.telephone}}" required>
+							</div>
+                        <br>
+   <div>
+						<label for="nom">Email propriétaire</label>
+						<input type="text" class="form-control" name="nom"  id="nom" value="{{proprio.mail}}" required>
+							</div>
+                        <br>
+										<div>
+						<label for="mdp">Adresse propriétaire</label>
+						<input type="password" class="form-control" name="mdp" id="mdp" value="{{proprio.adresse}}" required>
+                                	</div><br>
+										
+								
+           		
+						<button type="submit"  class="btn btn-primary" >Valider!</button>
+					</div>
+				</form>
+
+
+
+				
+
+{% endblock %}
