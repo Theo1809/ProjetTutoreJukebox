@@ -26,7 +26,7 @@
     "ext-json": "*",
     "doctrine/orm": "*",
     "fzaninotto/faker": "^1.8",
-    "illuminate/database": "5.5.*",
+    "illuminate/database": "6.20.*",
     "monolog/monolog": "^1.24",
     "php-di/php-di": "^6.0",
     "slim/flash": "^0.4.0",
