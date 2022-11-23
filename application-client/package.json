@@ -16,7 +16,7 @@
     "qr-scanner": "^1.1.1",
     "qrcode": "^1.4.4",
     "qrcode-reader": "^1.0.4",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "vue": "^2.6.11",
     "ws": "^7.2.1"
   }
